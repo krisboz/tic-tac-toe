@@ -1,0 +1,32 @@
+
+.material-symbols-outlined {
+    font-size: 150px;
+  font-variation-settings:
+  'FILL' 0,
+  'wght' 400,
+  'GRAD' 0,
+  'opsz' 48
+}
+#kruzic {
+    font-size: 120px;
+}
+
+
+.gameboard{
+    border: 1px solid black;
+    height: 500px;
+    width: 500px;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(3, 1fr);
+}
+
+.gametile{
+    border: 1px solid black;
+    height: 100%;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
