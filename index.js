@@ -1,24 +1,33 @@
 const Gameboard = (() => {
     //
-    let gameboard = [];
+    let gameboard = [] ;
 
-    const resetGameboard = () => {
-        gameboard = [null, null, null, null, null, null, null, null, null]
+    const resetGameboard = (gb) => {
+        //for some reason {gb=[]} doesn't work
+        gb.splice(0, gb.length)
+    }
+
+    const add = (el) => {
+        gameboard.push(el)
     }
     return {
-       gameboard, resetGameboard
+       gameboard, resetGameboard, add
     }
 })();
 
-//event listener za klik
-//
+
 
 const Player = (name, type) => {
     //is the player with x or o
-    //name of the player
+    let position = null;
+    const play = (pos) => {
+        position = pos;
+        console.log(Gameboard.gameboard)
+        return {type, position};
+    }
     //wins
     //losses
-    return {name, type}
+    return {name, type, play, position}
 }
 const displayController = (() => {
     //Update the DOM on click
@@ -33,28 +42,84 @@ const displayController = (() => {
             return ""
         }
     }
+
    //on illegal move
     //on win/lose
     const updateBoard = (gameboard) => {
         gameboard.forEach((el, index) => {
-            document.getElementById(`${index}`).insertAdjacentHTML("beforeend", appendHTML(el))
+            document.getElementById(`${el.position}`).insertAdjacentHTML("beforeend", appendHTML(el.type))
             
         });
     }
 
-    return {updateBoard};
+    const reset = () => {
+        for (let index = 0; index < 9; index++) {
+            const el = document.getElementById(`${index}`);
+            el.innerHTML = "";
+            
+        }
+    }
+
+    return {updateBoard, reset};
 })();
 
 
 const Gameflow = (() => {
-    Gameboard.resetGameboard();
-    displayController.updateBoard(Gameboard.gameboard)
+
     const o = Player("Neznam", "o")
     const x = Player("Bupubu", "x");
-    //whose turn is it
-    //track game
-    //check if 3 are connected
-    //check if the fields are full and none are connected
+    let turn = x;
+
+    const checkState = () => {
+        if (Gameboard.gameboard.length >= 9) {
+            Gameboard.resetGameboard(Gameboard.gameboard);
+            displayController.reset();
+            setTimeout(()=>{
+                window.alert("It's a draw")
+            }, 3000)
+            //window.alert("It's a draw")
+
+        }
+    }
+
+
+    const changeTurn = () => {
+        if(turn == o) {
+            turn = x;
+        }else if (turn == x) {
+            turn = o;
+        }
+    }
+
+    const checkLegal = (array, position) => {
+        //we get your position
+        console.log(array, position)
+
+        array.forEach(element => {
+            if(element.position == position) {
+                console.log("Illegal")
+            } else {
+                console.log("Legal")
+            }
+        });
+
+
+    }
+
+
+    document.querySelector(".gameboard").addEventListener("click", (e) => {
+        let currPlayer = turn.play(e.target.id);
+        checkLegal(Gameboard.gameboard, currPlayer.position)
+        Gameboard.add(currPlayer)
+        
+    
+
+        displayController.reset()
+        displayController.updateBoard(Gameboard.gameboard)
+        changeTurn();
+        checkState();
+
+    })
 
 })();
 

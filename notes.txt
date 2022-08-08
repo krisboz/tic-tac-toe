@@ -1,0 +1,45 @@
+Modules: 
+    1.Player
+    2.Gameboard
+    3. Gameflow
+    4. Display controller
+
+
+Gameboard needs to: 
+-Have the saved state of the game 
+    -array / three arrays / somehow another
+    - three arrays winning cons
+       0, 1, 2
+    0[x, x ,x]
+    1[o,o,o]
+    2[x.x.x]
+    1. ([0,0] [0,1] [0,2])
+
+_function addTo
+_function clear
+
+Display controller needs to:
+-Have the x and o symbols saved in variables
+-Then depending on the argument provided display accordingly
+_function updateDisplay
+_function resetDisplay
+
+
+Player needs to:
+-Keep track of:
+    Have two player instances already setup
+    Name
+    Type
+    Maybe wins/losses
+    _function Play where the player clicks on a square
+    _function Change the name
+
+Gameflow needs to:
+
+-Check legality of moves
+    if
+-Deduce a winner
+-Keep track of the turn
+-Know the players
+_function playTurn
+_function changeTurn
