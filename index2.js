@@ -8,7 +8,7 @@ const Gameboard = (() => {
     }
 
     const add = (el, index) => {
-        gameboard[index] = el;
+        gameboard[index] = el.type;
     }
     return {
        gameboard, resetGameboard, add
@@ -42,7 +42,7 @@ const displayController = (() => {
     }
 
     const updateBoard = (gameboard, clicked) => {
-         document.getElementById(`${clicked}`).insertAdjacentHTML("beforeend", appendHTML(gameboard[clicked].type))
+         document.getElementById(`${clicked}`).insertAdjacentHTML("beforeend", appendHTML(gameboard[clicked]))
 
 
     }
@@ -81,18 +81,6 @@ const Gameflow = (() => {
 
         let temporaryArr = [];
 
-        const helperFunc = (arr1, arr2, arr3) => {
-            if(arr1.every( (val, i, arr) => val === arr[0] )) {
-                console.log("Win for")
-            }
-            if(arr2.every( (val, i, arr) => val === arr[0] )) {
-                console.log("Win for")
-            }
-            if(arr3.every( (val, i, arr) => val === arr[0] )) {
-                console.log("Win for")
-            }
-        }
-
         //import currentClick and the symbol
         //select the arrays that contain the position number
         //loop through them and check if they all contain symbol
@@ -115,6 +103,14 @@ const Gameflow = (() => {
        for (var i=0; i<currSymbols.length; i+=3) {
         temporaryArr.push(currSymbols.slice(i, i+3))
        }
+
+       temporaryArr.forEach(element => {
+
+        console.log( )
+        if (element.every( (val, i, arr) => val === arr[0] )) {
+            window.alert("Win")
+        }
+       });
 
         console.log(currCombos, currSymbols, temporaryArr)
        
@@ -146,7 +142,6 @@ const Gameflow = (() => {
 
     document.querySelector(".gameboard").addEventListener("click", (e) => {
         let clickPosition = e.target.id
-        console.log(e.target.id)
         let currPlayer = turn.play(clickPosition);
         checkLegal(Gameboard.gameboard, currPlayer.position, currPlayer, clickPosition)
         console.log(currPlayer)
