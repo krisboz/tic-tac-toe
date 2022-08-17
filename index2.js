@@ -1,23 +1,26 @@
 const Gameboard = (() => {
     //
+
     let gameboard = [null, null, null, null, null, null, null, null, null] ;
 
-    const resetGameboard = (gb) => {
-        //for some reason {gb=[]} doesn't work
-        gb.splice(0, gb.length)
-    }
+    const reset = () => {
+        gameboard = [null, null, null, null, null, null, null, null, null]
+     }
+
+
 
     const add = (el, index) => {
         gameboard[index] = el.type;
     }
     return {
-       gameboard, resetGameboard, add
+       gameboard, reset, add
     }
 })();
 
 
 
 const Player = (name, type) => {
+
     let position = null;
     const play = (pos) => {
         position = pos;
@@ -42,8 +45,12 @@ const displayController = (() => {
     }
 
     const updateBoard = (gameboard, clicked) => {
-         document.getElementById(`${clicked}`).insertAdjacentHTML("beforeend", appendHTML(gameboard[clicked]))
+         document.getElementById(`${clicked}`).insertAdjacentHTML("afterbegin", appendHTML(gameboard[clicked]))
 
+
+    }
+
+    const updateNames = (name, turn) => {
 
     }
 
@@ -63,12 +70,26 @@ const Gameflow = (() => {
 
     const playerOne = Player("PlayerOne", "x")
     const playerTwo = Player("PlayerTwo", "o")
-
+    let result = "";
+    
+    document.getElementById("btnOne").addEventListener("click", (e => {
+        let name = document.getElementById("playerOne").value;
+        playerOne.name = name
+        console.log(playerOne) 
+        document.getElementById("nameOne").innerHTML = playerOne.name
+    }))
+    document.getElementById("btnTwo").addEventListener("click", (e => {
+        let name = document.getElementById("playerTwo").value;
+        playerTwo.name = name
+        console.log(playerTwo) 
+        document.getElementById("nameTwo").innerHTML = playerTwo.name
+    
+    }))
     let turn = playerOne;
 
     const checkState = (currPlayer, gameboard) => {
-         //draw
-        console.log("checkingstate")
+
+
 
         let winningCombos = [
             [0, 1, 2], [3, 4, 5], [6, 7, 8],
@@ -81,11 +102,6 @@ const Gameflow = (() => {
 
         let temporaryArr = [];
 
-        //import currentClick and the symbol
-        //select the arrays that contain the position number
-        //loop through them and check if they all contain symbol
-        //ako je onda WIN
-        //ako ne dalje igra dok ne bude sve puno
 
         winningCombos.forEach(element => {
             if(element.includes(parseInt(currPlayer.position))) {
@@ -106,15 +122,20 @@ const Gameflow = (() => {
 
        temporaryArr.forEach(element => {
 
-        console.log( )
+        //Check if array elements are equal
         if (element.every( (val, i, arr) => val === arr[0] )) {
-            window.alert("Win")
-        }
+            result = "win";
+
+
+
+        } else result =""
        });
 
-        console.log(currCombos, currSymbols, temporaryArr)
        
-        //win
+        ////win
+        return result;
+
+
     }
 
 
@@ -138,18 +159,38 @@ const Gameflow = (() => {
 
     }
 
+    const testFuncy = (e) => {
+
+        let clickPosition = e.target.id
+        let currPlayer = turn.play(clickPosition);
+        checkLegal(Gameboard.gameboard, currPlayer.position, currPlayer, clickPosition)
+
+    }
+
 
 
     document.querySelector(".gameboard").addEventListener("click", (e) => {
         let clickPosition = e.target.id
         let currPlayer = turn.play(clickPosition);
         checkLegal(Gameboard.gameboard, currPlayer.position, currPlayer, clickPosition)
-        console.log(currPlayer)
-        //displayController.updateBoard(Gameboard.gameboard, clickPosition)
-        checkState(currPlayer, Gameboard.gameboard);
+        //checkState(currPlayer, Gameboard.gameboard);
+         checkState(currPlayer, Gameboard.gameboard);
+ 
+        if(result === "win" || result === "draw") {
+            displayController.reset();
+            Gameboard.gameboard = [null, null, null, null, null, null, null, null, null]
+            result = ""
+        } else if (result !== "win") {
+            console.log("it should work")
+            result = ""
+        }
+
+        console.log(result, Gameboard.gameboard, currPlayer)
         changeTurn();
 
+
     })
+
 
 })();
 

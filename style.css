@@ -7,10 +7,20 @@
   'GRAD' 0,
   'opsz' 48
 }
-#kruzic {
+.kruzic {
     font-size: 120px;
 }
 
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+}
+
+.player {
+    border: 1px solid black;
+}
 
 .gameboard{
     border: 1px solid black;
