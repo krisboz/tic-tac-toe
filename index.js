@@ -30,8 +30,8 @@ const Player = (name, type) => {
 const View =(()=>{
 
     const appendHTML = (el) => {
-        const o = ( `<span class="material-symbols-outlined kruzic" id=""> radio_button_unchecked  </span>`);
-        const x = (`<span class="material-symbols-outlined"> close </span>`) ;     
+        const o = ( `<span class="material-symbols-outlined kruzic simbol" id=""> radio_button_unchecked  </span>`);
+        const x = (`<span class="material-symbols-outlined simbol"> close </span>`) ;     
 
         if (el === "x") {
             return x;
@@ -82,12 +82,13 @@ const Controller =(()=>{
     }
 
     const evaluateState = () => {
-        if (state === "playing") {
-            console.log("playing");
-        } else if (state === "win") {
-            console.log("win")
+        if (state === "win") {
+            window.alert(`${turn.name} has won!`)
+            resetAll();
+            
         }else if(state==="draw") {
-            console.log("draw")
+            window.alert("Draw")
+            resetAll();
         }
     }
 

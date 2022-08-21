@@ -13,19 +13,47 @@
 
     <div class="container">
 
+    <div class="left side">
+        
+        <div class="sidetop">
+            
+        </div>
         <div class="player"> 
             <div class="input_name">
                 <label for="playerOne"> Enter your name</label>
                 <input type="text" name="playerOne" id="playerOne">
                 <button id="btnOne">Submit</button>
             </div>
+            <h3>Player One</h3>
 
-            <button id="resetgameboard">RESET</button>
+            <table>
+                <tr>
+                    <th>Wins:</th>
+                    <th>15</th>
+                </tr>
+                <tr>
+                    <th>Draws:</th>
+                    <th>18</th>
+                </tr>
+                <tr>
+                    <th>Losses:</th>
+                    <th>12</th>
+                </tr>
+                
+            </table>
+
 
             <h3 class="playerName" id="nameOne"></h3>
+            <span class="material-symbols-outlined simbol"> close </span>
 
         </div>
 
+        <div class="sidebottom">
+
+        </div>
+    </div>
+
+    <div class="center">
         <div class="gameboard">
             <div class="gametile" id="0"></div>
             <div class="gametile" id="1"> </div>
@@ -38,17 +66,52 @@
             <div class="gametile" id="8"></div>
         </div>
 
+        <div class="btn-cont">
+        <button id="resetgameboard">RESET</button>
+        </div>
+    </div>
+
+    <div class="right side">
+        <div class="sidetop">
+
+        </div>
+
         <div class="player">
             <div class="input_name">
                 <label for="playerTwo"> Enter your name</label>
                 <input type="text" name="playerTwo" id="playerTwo">
                 <button id="btnTwo">Submit</button>
             </div>
+
+            <h3 class="playerName" id="nameTwo"></h3>
+            <h3>Player Two</h3>
+            <table>
+                <tr>
+                    <th>Wins:</th>
+                    <th>15</th>
+                </tr>
+                <tr>
+                    <th>Draws:</th>
+                    <th>18</th>
+                </tr>
+                <tr>
+                    <th>Losses:</th>
+                    <th>12</th>
+                </tr>
+                
+            </table>
+
+            <span class="material-symbols-outlined kruzic simbol" id=""> radio_button_unchecked  </span>
         </div>
 
-        <h3 class="playerName" id="nameTwo"></h3>
+        <div class="sidebottom">
+
+        </div>
+
+
 
     </div>
+</div>
 
 
     

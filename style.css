@@ -1,6 +1,6 @@
 
 .material-symbols-outlined {
-    font-size: 150px;
+    font-size: 120px;
   font-variation-settings:
   'FILL' 0,
   'wght' 400,
@@ -8,24 +8,44 @@
   'opsz' 48
 }
 .kruzic {
-    font-size: 120px;
+    font-size: 96px;
 }
 
+div {
+    border: 1px solid black;
+}
+.simbol {
+    animation: pulse 0.1s linear 1;
+}
+
+@keyframes pulse{
+    25%  {transform: scale(0.9);}
+    75%  {transform: scale(1.1);}
+}
 .container {
     display: flex;
     justify-content: center;
     align-items: center;
+    gap: 15px;
 
+}
+.side {
+    border: 1px solid black;
+    
 }
 
 .player {
     border: 1px solid black;
 }
 
+.center {
+    padding-top: 70px;
+}
+
 .gameboard{
     border: 1px solid black;
-    height: 500px;
-    width: 500px;
+    height: 400px;
+    width: 400px;
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     grid-template-rows: repeat(3, 1fr);
@@ -38,5 +58,26 @@
     display: flex;
     align-items: center;
     justify-content: center;
+}
+
+.btn-cont {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding-top: 5%;
+}
+
+.btn-cont > button {
+    height: 50px;
+    width: 150px;
+    background-color: orange; /* Green */
+    border: none;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    font-weight: bold;
 }
 
