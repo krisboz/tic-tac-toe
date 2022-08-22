@@ -1,4 +1,11 @@
 
+html, body {
+    margin: 0;
+    padding: 0;
+    background-color: whitesmoke;
+
+}
+
 .material-symbols-outlined {
     font-size: 120px;
   font-variation-settings:
@@ -11,9 +18,7 @@
     font-size: 96px;
 }
 
-div {
-    border: 1px solid black;
-}
+
 .simbol {
     animation: pulse 0.1s linear 1;
 }
@@ -23,32 +28,76 @@ div {
     75%  {transform: scale(1.1);}
 }
 .container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 15px;
+    box-sizing: border-box;
+    height: 100vh;
+    width: 100vw;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr ;
+
+
 
 }
 .side {
-    border: 1px solid black;
-    
+
+    display: grid;
+    grid-template-rows: 1fr 4fr 1fr;
+}
+
+.sidetop {
+
 }
 
 .player {
-    border: 1px solid black;
+
+    width: 55%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background-color: rgb(11, 157, 103);
+    color: white;
+    border-radius: 5px;
+
+}
+
+.sitelogo {
+    padding-left: 5%;
+}
+
+.sitelogo >h1{
+    font-size: 34px;
+    color: rgb(233, 152, 1);
+    
+}
+
+.sidecenter {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.sidebottom {
+
 }
 
 .center {
     padding-top: 70px;
+    display: flex;
+
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
 }
 
 .gameboard{
-    border: 1px solid black;
+
     height: 400px;
     width: 400px;
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     grid-template-rows: repeat(3, 1fr);
+    background-color: white;
 }
 
 .gametile{
@@ -70,7 +119,7 @@ div {
 .btn-cont > button {
     height: 50px;
     width: 150px;
-    background-color: orange; /* Green */
+    background-color: rgb(233, 152, 1); /* Green */
     border: none;
     color: white;
     padding: 15px 32px;
