@@ -19,14 +19,11 @@ const Game = (()=>{
 })();
 //Player
 const Player = (name, type) => {
-
-    const play = () => {
-
-    }
-
-    return {name, type, play}
+    let wins = 0;
+    return {name, type, wins}
 }
-//displayController
+
+
 const View =(()=>{
 
     const appendHTML = (el) => {
@@ -54,10 +51,17 @@ const View =(()=>{
         }
     }
 
-    return {update, reset}
+    const updateNames = () => {
+
+    }
+
+    const displayWins = (symbol, value) => {
+        document.getElementById(symbol).innerHTML = value;
+    }
+    return {update, reset, displayWins}
 
 })();
-//Gameflow
+
 
 const Controller =(()=>{
     let playerOne = Player("PlayerOne", "x")
@@ -73,6 +77,11 @@ const Controller =(()=>{
         state = "playing"
     }
 
+    const addWin = () => {
+        turn.wins +=1
+        console.log(turn.wins)
+    }
+
     const changeTurn = () => {
         if (turn === playerOne) {
             turn = playerTwo
@@ -83,12 +92,13 @@ const Controller =(()=>{
 
     const evaluateState = () => {
         if (state === "win") {
+            addWin();
+            View.displayWins(turn.type, turn.wins)
             window.alert(`${turn.name} has won!`)
-            resetAll();
+
             
         }else if(state==="draw") {
             window.alert("Draw")
-            resetAll();
         }
     }
 
@@ -137,7 +147,7 @@ const Controller =(()=>{
 
 
     const playRound = (e) => {
-        if(Game.board[e.target.id] === null){
+        if(Game.board[e.target.id] === null && state === "playing"){
             Game.add(turn.type, e.target.id)
             View.update(e.target.id)
             checkResult(e)
@@ -151,6 +161,7 @@ const Controller =(()=>{
     document.querySelector(".gameboard").addEventListener("click", (e)=>{
         playRound(e)
         changeTurn()
+
     }) 
 
 
@@ -159,19 +170,15 @@ const Controller =(()=>{
 
     })
 
+    document.querySelectorAll(".editBtn").forEach(e=> e.addEventListener("click", (e)=>{
+        let playerHash = {playerOne, playerTwo}
+        let newName = window.prompt("Enter your name")
+        playerHash[e.target.id].name = newName;
+        console.log(playerOne, playerTwo)
+        document.getElementById("one").innerHTML = playerOne.name
+        document.getElementById("two").innerHTML = playerTwo.name
+    }))
+
 
 
 })();
-
-
-
-
-
-
-//model
-    //Gameboard
-    //Player
-//view
-    //displayController
-
-//controller
